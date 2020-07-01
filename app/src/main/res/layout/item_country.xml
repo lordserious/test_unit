@@ -37,11 +37,14 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_currency"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/type_changed"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
