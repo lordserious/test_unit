@@ -1,12 +1,8 @@
 package com.gerardo.desafiobcp.view.ui.activity
 
-import android.content.Intent
-import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import com.gerardo.desafiobcp.R
 import com.gerardo.desafiobcp.view.ui.base.BaseActivity
-import com.gerardo.desafiobcp.view.ui.entity.MoneyEntity
 import com.gerardo.desafiobcp.view.ui.utils.ChangeMoney
 import com.gerardo.desafiobcp.view.ui.utils.Money
 import com.gerardo.desafiobcp.view.ui.utils.startActivity
@@ -23,19 +19,19 @@ class MainActivity : BaseActivity() {
 
         Thread.sleep(2000)
 
-        setUI()
+
         changeMoneyValue()
         calculoDeArriba()
         calculoDeAbajo()
         val currencies = Money.getAllMoney()
-        Log.d("Money_TAG", "_____________________________${currencies.size}")
-        Log.d("Money_TAG", "_____________________________${currencies.size}")
 
-        btnGo.setOnClickListener {
-            startActivity(FlagsActivity::class.java)
-        }
     }
 
+    override fun onResume() {
+        super.onResume()
+        setUI()
+        validationFlags()
+    }
     private fun setUI() {
         txtCompraYVenta.text = "Compra: $TIPO_CAMBIO_COMPRA_DOLAR | Venta: $TIPO_CAMBIO_VENTA_DOLAR"
     }
@@ -265,11 +261,21 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun redirectToFlags() {
-        val nextActivity = Intent(this, FlagsActivity::class.java)
-        startActivity(nextActivity)
-    }
+    /*VALIDACION DE BOTON PARA QUE ME ABRA LA TERCERA PANTALLA*/
 
+    fun validationFlags() {
+        when {
+            btnChangeIcon.text != SOLES -> {
+                startActivity(FlagsActivity::class.java)
+            }
+            btnChangeIconOut.text != SOLES -> {
+                startActivity(FlagsActivity::class.java)
+            }
+            else -> {
+                Log.wtf("RetoBcp", "----")
+            }
+        }
+    }
 
     companion object {
 
