@@ -36,18 +36,25 @@ class MainActivity : BaseActivity() {
         txtCompraYVenta.text = "Compra: ${moneyBase2.typeChangeBuy} | Venta: ${moneyBase2.typeChangeSale}"
 
         changeMoneyValue()
+        setClick()
         /*calculoDeArriba()
         calculoDeAbajo()*/
+        //setupListener()
     }
 
     override fun onResume() {
         super.onResume()
         /*setUI()*/
         //validationFlags()
+        txtCompraYVenta.text = "Compra: ${moneyBase2.typeChangeBuy} | Venta: ${moneyBase2.typeChangeSale}"
     }
     private fun setUI() {
         btnChangeIcon.text = (btnChangeIcon.tag as MoneyEntity).moneyName
         btnChangeIconOut.text = (btnChangeIconOut.tag as MoneyEntity).moneyName
+    }
+
+    private fun setupListener() {
+        //validationFlags()
     }
 
     private fun changeMoneyValue() {
@@ -58,12 +65,10 @@ class MainActivity : BaseActivity() {
             btnChangeIconOut.tag = temporalSave
             btnChangeIcon.text = temporalSave2.moneyName
             btnChangeIconOut.text = temporalSave.moneyName
-            Log.d("click_b", "________________${(btnChangeIcon.tag as MoneyEntity).moneyName}")
-            Log.d("click_b", "________________${(btnChangeIconOut.tag as MoneyEntity).moneyName}")
             changedValues()
         }
-
     }
+
     private fun changedValues() {
         when {
             btnChangeIcon.tag == moneyBase2 && btnChangeIconOut.tag == moneyBase -> {
@@ -85,7 +90,7 @@ class MainActivity : BaseActivity() {
             if ((it.tag as MoneyEntity) != moneyBase) openCurrencyFlag(0)
         }
 
-        btnChangeIcon.setOnClickListener {
+        btnChangeIconOut.setOnClickListener {
             if ((it.tag as MoneyEntity) != moneyBase) openCurrencyFlag(1)
         }
     }
@@ -230,7 +235,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    fun openCurrencyFlag(typeButton : Int) {
+    private fun openCurrencyFlag(typeButton : Int) {
         startActivityForResult(Intent(this, FlagsActivity::class.java).apply {
             putExtra("extra0", typeButton)
         }, REQUEST_MONEY)
@@ -242,6 +247,18 @@ class MainActivity : BaseActivity() {
             val typeButton = data?.getSerializableExtra("extra0") as Int
             val moneyEntity = data?.getSerializableExtra("extra1") as MoneyEntity
             moneyBase2 = moneyEntity
+            if (typeButton == 0) {
+                btnChangeIcon.tag = moneyBase2
+                btnChangeIconOut.tag = moneyBase
+                btnChangeIcon.text = moneyBase2.moneyName
+                btnChangeIconOut.text = moneyBase.moneyName
+            }
+            if (typeButton == 1) {
+                btnChangeIcon.tag = moneyBase
+                btnChangeIconOut.tag = moneyBase2
+                btnChangeIcon.text = moneyBase.moneyName
+                btnChangeIconOut.text = moneyBase2.moneyName
+            }
         }
         super.onActivityResult(requestCode, resultCode, data)
     }

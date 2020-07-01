@@ -53,6 +53,9 @@ class CountriesAdapter(private val listener: (MoneyEntity) -> Unit) : RecyclerVi
                 .into(image_url)
             text_currency.text = item.moneyNameCountry
             type_changed.text = item.factoryMoney
+            item_country_linear.setOnClickListener {
+                listener(item)
+            }
         }
 
         companion object {
