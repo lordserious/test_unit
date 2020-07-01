@@ -126,16 +126,6 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnGo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/colorAccent"
-        android:text="Ir a las banderas"
-        android:textAlignment="center"
-        android:textColor="@color/colorWhite"
-        tools:ignore="RtlCompat" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnOperationChange"
