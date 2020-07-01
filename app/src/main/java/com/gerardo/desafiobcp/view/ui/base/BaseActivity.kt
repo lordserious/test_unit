@@ -24,10 +24,9 @@ import com.gerardo.desafiobcp.view.ui.application.BcpDesafioApplication
 import com.google.android.material.navigation.NavigationView
 
 abstract class BaseActivity : AppCompatActivity() {
-    protected var toolbar: Toolbar? = null
-    protected var drawerLayout: DrawerLayout? = null
+    private var toolbar: Toolbar? = null
+    private var drawerLayout: DrawerLayout? = null
     private var drawerToggle: ActionBarDrawerToggle? = null
-    protected var navigationView: NavigationView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

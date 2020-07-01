@@ -51,7 +51,8 @@ class CountriesAdapter(private val listener: (Int, MoneyEntity) -> Unit) : Recyc
                     }
                 })
                 .into(image_url)
-            text_currency.text = item.moneyName
+            text_currency.text = item.moneyNameCountry
+            type_changed.text = item.factoryMoney
         }
 
         companion object {
