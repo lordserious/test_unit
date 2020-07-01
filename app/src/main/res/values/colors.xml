@@ -12,5 +12,6 @@
 
     <!-- Color de Errores -->
     <color name="red">#CF2D3A</color>
+    <color name="grey_edit">#c5c5c5</color>
 
 </resources>

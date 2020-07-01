@@ -30,7 +30,7 @@ class MainActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         setUI()
-        //validationFlags()
+         validationFlags()
     }
     private fun setUI() {
         txtCompraYVenta.text = "Compra: $TIPO_CAMBIO_COMPRA_DOLAR | Venta: $TIPO_CAMBIO_VENTA_DOLAR"
