@@ -47,14 +47,69 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun circuloCambioDeValores() {
-        if (btnChangeIcon.text == DOLARES && btnChangeIconOut.text == SOLES) {
-            val nuevoValor =
-                (txtMoneyIn.text.toString().trim().toDouble()) * TIPO_CAMBIO_COMPRA_DOLAR
-            txtMoneyOut.setText(nuevoValor.toString())
-        } else if (btnChangeIcon.text == SOLES && btnChangeIconOut.text == DOLARES) {
-            val nuevoValor =
-                (txtMoneyIn.text.toString().trim().toDouble()) / TIPO_CAMBIO_VENTA_DOLAR
-            txtMoneyOut.setText(nuevoValor.toString())
+        when {
+            btnChangeIcon.text == DOLARES && btnChangeIconOut.text == SOLES -> {
+                val nuevoValor =
+                    (txtMoneyIn.text.toString().trim().toDouble()) * TIPO_CAMBIO_COMPRA_DOLAR
+                txtMoneyOut.setText(nuevoValor.toString())
+            }
+            btnChangeIcon.text == SOLES && btnChangeIconOut.text == DOLARES -> {
+                val nuevoValor =
+                    (txtMoneyIn.text.toString().trim().toDouble()) / TIPO_CAMBIO_VENTA_DOLAR
+                txtMoneyOut.setText(nuevoValor.toString())
+            }
+            btnChangeIcon.text == EUROS && btnChangeIconOut.text == SOLES -> {
+                val nuevoValor =
+                    (txtMoneyIn.text.toString().trim().toDouble()) * TIPO_CAMBIO_COMPRA_EURO
+                txtMoneyOut.setText(nuevoValor.toString())
+            }
+            btnChangeIcon.text == SOLES && btnChangeIconOut.text == EUROS -> {
+                val nuevoValor =
+                    (txtMoneyIn.text.toString().trim().toDouble()) / TIPO_CAMBIO_VENTA_EURO
+                txtMoneyOut.setText(nuevoValor.toString())
+            }
+            btnChangeIcon.text == LIBRAS && btnChangeIconOut.text == SOLES -> {
+                val nuevoValor =
+                    (txtMoneyIn.text.toString().trim().toDouble()) * TIPO_CAMBIO_COMPRA_LIBRA
+                txtMoneyOut.setText(nuevoValor.toString())
+            }
+            btnChangeIcon.text == SOLES && btnChangeIconOut.text == LIBRAS -> {
+                val nuevoValor =
+                    (txtMoneyIn.text.toString().trim().toDouble()) / TIPO_CAMBIO_VENTA_LIBRA
+                txtMoneyOut.setText(nuevoValor.toString())
+            }
+            btnChangeIcon.text == YENES && btnChangeIconOut.text == SOLES -> {
+                val nuevoValor =
+                    (txtMoneyIn.text.toString().trim().toDouble()) * TIPO_CAMBIO_COMPRA_YEN
+                txtMoneyOut.setText(nuevoValor.toString())
+            }
+            btnChangeIcon.text == SOLES && btnChangeIconOut.text == YENES -> {
+                val nuevoValor =
+                    (txtMoneyIn.text.toString().trim().toDouble()) / TIPO_CAMBIO_VENTA_YEN
+                txtMoneyOut.setText(nuevoValor.toString())
+            }
+            btnChangeIcon.text == DOLAR_CANADIENSE && btnChangeIconOut.text == SOLES -> {
+                val nuevoValor =
+                    (txtMoneyIn.text.toString().trim()
+                        .toDouble()) * TIPO_CAMBIO_COMPRA_DOLAR_CANADIENSE
+                txtMoneyOut.setText(nuevoValor.toString())
+            }
+            btnChangeIcon.text == SOLES && btnChangeIconOut.text == DOLAR_CANADIENSE -> {
+                val nuevoValor =
+                    (txtMoneyIn.text.toString().trim()
+                        .toDouble()) / TIPO_CAMBIO_VENTA_DOLAR_CANADIENSE
+                txtMoneyOut.setText(nuevoValor.toString())
+            }
+            btnChangeIcon.text == FRANCO_SUIZO && btnChangeIconOut.text == SOLES -> {
+                val nuevoValor =
+                    (txtMoneyIn.text.toString().trim().toDouble()) * TIPO_CAMBIO_COMPRA_FRANCO_SUIZO
+                txtMoneyOut.setText(nuevoValor.toString())
+            }
+            btnChangeIcon.text == SOLES && btnChangeIconOut.text == FRANCO_SUIZO -> {
+                val nuevoValor =
+                    (txtMoneyIn.text.toString().trim().toDouble()) / TIPO_CAMBIO_VENTA_FRANCO_SUIZO
+                txtMoneyOut.setText(nuevoValor.toString())
+            }
         }
     }
 
