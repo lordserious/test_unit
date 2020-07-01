@@ -2,12 +2,9 @@ package com.gerardo.desafiobcp.view.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.gerardo.desafiobcp.R
 import com.gerardo.desafiobcp.view.ui.utils.ChangeMoney
-import com.gerardo.desafiobcp.view.ui.utils.SimpleTextWatcher
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -32,24 +29,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun changeMoneyValue() {
-
-        /*
-        txtMoneyOut.addTextChangedListener(object : SimpleTextWatcher() {
-            override fun afterTextChanged(s: Editable?) {
-                val nuevoValor = (txtMoneyIn.text.toString().trim().toDouble()) * 3.29
-                Log.wtf("VENTA", "VALOR ANTIGUO$nuevoValor")
-                txtMoneyIn.setText(nuevoValor.toString())
-            }
-        })
-
-        txtMoneyIn.addTextChangedListener(object : SimpleTextWatcher() {
-            override fun afterTextChanged(s: Editable?) {
-                val nuevoValor = (txtMoneyIn.text.toString().trim().toDouble()) * 3.25
-                Log.wtf("COMPRA", "VALOR ANTIGUO$nuevoValor")
-                txtMoneyOut.setText(nuevoValor.toString())
-
-            }
-        })*/
 
         moneyChange.setOnClickListener {
             if (btnChangeIcon.text == DOLARES && btnChangeIconOut.text == SOLES) {
@@ -95,15 +74,72 @@ class MainActivity : AppCompatActivity() {
 
     private fun calculoDeAbajo() {
         btnOperationChange2.setOnClickListener {
-            if (btnChangeIcon.text == DOLARES && btnChangeIconOut.text == SOLES) {
-                val nuevoValor =
-                    (txtMoneyIn.text.toString().trim().toDouble()) * TIPO_CAMBIO_COMPRA_DOLAR
-                txtMoneyOut.setText(nuevoValor.toString())
-            } else {
-                val nuevoValor =
-                    (txtMoneyIn.text.toString().trim().toDouble()) / TIPO_CAMBIO_VENTA_DOLAR
-                txtMoneyOut.setText(nuevoValor.toString())
+            when {
+                btnChangeIcon.text == DOLARES && btnChangeIconOut.text == SOLES -> {
+                    val nuevoValor =
+                        (txtMoneyIn.text.toString().trim().toDouble()) * TIPO_CAMBIO_COMPRA_DOLAR
+                    txtMoneyOut.setText(nuevoValor.toString())
+                }
+                btnChangeIcon.text == SOLES && btnChangeIconOut.text == DOLARES -> {
+                    val nuevoValor =
+                        (txtMoneyIn.text.toString().trim().toDouble()) / TIPO_CAMBIO_VENTA_DOLAR
+                    txtMoneyOut.setText(nuevoValor.toString())
+                }
+                btnChangeIcon.text == EUROS && btnChangeIconOut.text == SOLES -> {
+                    val nuevoValor =
+                        (txtMoneyIn.text.toString().trim().toDouble()) * TIPO_CAMBIO_COMPRA_EURO
+                    txtMoneyOut.setText(nuevoValor.toString())
+                }
+                btnChangeIcon.text == SOLES && btnChangeIconOut.text == EUROS -> {
+                    val nuevoValor =
+                        (txtMoneyIn.text.toString().trim().toDouble()) / TIPO_CAMBIO_VENTA_EURO
+                    txtMoneyOut.setText(nuevoValor.toString())
+                }
+                btnChangeIcon.text == LIBRAS && btnChangeIconOut.text == SOLES -> {
+                    val nuevoValor =
+                        (txtMoneyIn.text.toString().trim().toDouble()) * TIPO_CAMBIO_COMPRA_LIBRA
+                    txtMoneyOut.setText(nuevoValor.toString())
+                }
+                btnChangeIcon.text == SOLES && btnChangeIconOut.text == LIBRAS -> {
+                    val nuevoValor =
+                        (txtMoneyIn.text.toString().trim().toDouble()) / TIPO_CAMBIO_VENTA_LIBRA
+                    txtMoneyOut.setText(nuevoValor.toString())
+                }
+                btnChangeIcon.text == YENES && btnChangeIconOut.text == SOLES -> {
+                    val nuevoValor =
+                        (txtMoneyIn.text.toString().trim().toDouble()) * TIPO_CAMBIO_COMPRA_YEN
+                    txtMoneyOut.setText(nuevoValor.toString())
+                }
+                btnChangeIcon.text == SOLES && btnChangeIconOut.text == YENES -> {
+                    val nuevoValor =
+                        (txtMoneyIn.text.toString().trim().toDouble()) / TIPO_CAMBIO_VENTA_YEN
+                    txtMoneyOut.setText(nuevoValor.toString())
+                }
+                btnChangeIcon.text == DOLAR_CANADIENSE && btnChangeIconOut.text == SOLES -> {
+                    val nuevoValor =
+                        (txtMoneyIn.text.toString().trim()
+                            .toDouble()) * TIPO_CAMBIO_COMPRA_DOLAR_CANADIENSE
+                    txtMoneyOut.setText(nuevoValor.toString())
+                }
+                btnChangeIcon.text == SOLES && btnChangeIconOut.text == DOLAR_CANADIENSE -> {
+                    val nuevoValor =
+                        (txtMoneyIn.text.toString().trim()
+                            .toDouble()) / TIPO_CAMBIO_VENTA_DOLAR_CANADIENSE
+                    txtMoneyOut.setText(nuevoValor.toString())
+                }
+                btnChangeIcon.text == FRANCO_SUIZO && btnChangeIconOut.text == SOLES -> {
+                    val nuevoValor =
+                        (txtMoneyIn.text.toString().trim().toDouble()) * TIPO_CAMBIO_COMPRA_FRANCO_SUIZO
+                    txtMoneyOut.setText(nuevoValor.toString())
+                }
+                btnChangeIcon.text == SOLES && btnChangeIconOut.text == FRANCO_SUIZO -> {
+                    val nuevoValor =
+                        (txtMoneyIn.text.toString().trim().toDouble()) / TIPO_CAMBIO_VENTA_FRANCO_SUIZO
+                    txtMoneyOut.setText(nuevoValor.toString())
+                }
             }
+
+
         }
     }
 
@@ -133,14 +169,13 @@ class MainActivity : AppCompatActivity() {
         private const val TIPO_CAMBIO_VENTA_FRANCO_SUIZO= 2.29
         private const val TIPO_CAMBIO_COMPRA_FRANCO_SUIZO = 2.50
 
-
         private const val SOLES = "Soles"
         private const val DOLARES = "Dolares"
-        private const val EURO = "E"
-        private const val YEN = "Y"
-        private const val LIBRA = "L"
-        private const val DOLAR_CANADIENSE = "DC"
-        private const val FRANCO_SUIZO = "FS"
+        private const val EUROS = "Euros"
+        private const val LIBRAS = "Libras"
+        private const val YENES = "Yenes"
+        private const val DOLAR_CANADIENSE = "Dolar Canadiense"
+        private const val FRANCO_SUIZO = "Franco Suizo"
 
     }
 }
