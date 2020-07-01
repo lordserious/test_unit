@@ -9,115 +9,70 @@
     tools:context=".view.ui.activity.MainActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/splash_bcp" />
-
+        android:id="@+id/img_main"
+        style="@style/BcpImagenPrincipal" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/content_cotizador"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        style="@style/BcpLinearCotizador">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/rltCotizador"
+            style="@style/BcpRelative">
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:id="@+id/lnlInput"
+                style="@style/BcpLinersInput">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/money_in_wrapper"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="20dp"
-                    android:gravity="center">
+                    style="@style/BcpWrapper">
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/txtMoneyIn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Tu envias:"
-                        android:imeOptions="actionNext"
-                        android:inputType="textAutoComplete|textAutoCorrect|textCapSentences"
-                        android:nextFocusDown="@+id/description"
-                        android:textSize="16sp" />
+                        style="@style/BcpEditText" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnChangeIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/blueBcp"
-                    android:gravity="center"
-                    android:text="Dolares"
-                    android:textColor="@color/colorWhite" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/moneyChange"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:layout_gravity="end"
-                    android:src="@drawable/ic_flecha"
-                    app:civ_border_color="#FF000000"
-                    app:civ_border_width="2dp" />
+                    style="@style/BcpButton" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                android:id="@+id/lnlOut"
+                style="@style/BcpLinersInput.Out">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/money_out_wrapper"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:gravity="center">
+                    style="@style/BcpWrapper">
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/txtMoneyOut"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Tu recibes:"
-                        android:imeOptions="actionNext"
-                        android:inputType="textAutoComplete|textAutoCorrect|textCapSentences"
-                        android:nextFocusDown="@+id/description"
-                        android:textSize="16sp" />
+                        style="@style/BcpEditText.Out" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnChangeIconOut"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/blueBcp"
-                    android:gravity="center"
-                    android:text="Soles"
-                    android:textColor="@color/colorWhite" />
+                    style="@style/BcpButton.Soles" />
 
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/moneyChange"
+                style="@style/BcpImgChange"
+                app:civ_border_color="@color/black"
+                app:civ_border_width="2dp" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/txtCompraYVenta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Compra:valor1 | Venta: valor2"
-            android:textAlignment="center"
-            android:textColor="@color/black" />
+            style="@style/BcpTextInformation"
+            tools:text="@string/tools_description" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -125,7 +80,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_weight="1" />
-
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnOperationChange"
@@ -140,14 +94,6 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnOperationChange2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorAccent"
-        android:text="Calculo de abajo"
-        android:textAlignment="center"
-        android:textColor="@color/colorWhite"
-        tools:ignore="RtlCompat" />
+        style="@style/BcpButtonOperation" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

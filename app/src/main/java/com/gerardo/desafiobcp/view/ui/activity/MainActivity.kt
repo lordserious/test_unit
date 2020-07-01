@@ -23,6 +23,7 @@ class MainActivity : BaseActivity() {
         changeMoneyValue()
         calculoDeArriba()
         calculoDeAbajo()
+        //setupListener()
         val currencies = Money.getAllMoney()
     }
 
@@ -35,8 +36,11 @@ class MainActivity : BaseActivity() {
         txtCompraYVenta.text = "Compra: $TIPO_CAMBIO_COMPRA_DOLAR | Venta: $TIPO_CAMBIO_VENTA_DOLAR"
     }
 
-    private fun changeMoneyValue() {
+    private fun setupListener() {
+        validationFlags()
+    }
 
+    private fun changeMoneyValue() {
         moneyChange.setOnClickListener {
             if (btnChangeIcon.text == DOLARES && btnChangeIconOut.text == SOLES) {
                 Thread.sleep(100)
@@ -50,7 +54,6 @@ class MainActivity : BaseActivity() {
                 circuloCambioDeValores()
             }
         }
-
     }
 
     fun circuloCambioDeValores() {
