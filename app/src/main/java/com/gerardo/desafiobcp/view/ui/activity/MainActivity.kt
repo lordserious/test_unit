@@ -24,7 +24,6 @@ class MainActivity : BaseActivity() {
         calculoDeArriba()
         calculoDeAbajo()
         val currencies = Money.getAllMoney()
-
     }
 
     override fun onResume() {
