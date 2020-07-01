@@ -1,5 +1,7 @@
 package com.gerardo.desafiobcp.view.ui.activity
 
+import android.app.Activity
+import android.content.Intent
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gerardo.desafiobcp.R
@@ -16,8 +18,14 @@ class FlagsActivity : BaseActivity() {
 
     override fun onCreate() {
         super.onCreate()
-        adapter = CountriesAdapter {i, moneyEntity ->
+        val typeButton = intent.getIntExtra("extra0", 0)
 
+        adapter = CountriesAdapter {moneyEntity ->
+            setResult(Activity.RESULT_OK, Intent().apply {
+                putExtra("extra0", typeButton)
+                putExtra("extra1", moneyEntity)
+            })
+            finish()
         }
         recycler.layoutManager = GridLayoutManager(this, 1) as RecyclerView.LayoutManager?
         adapter.data = currencies

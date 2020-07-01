@@ -41,7 +41,19 @@ object Money {
     }
 
     fun getAllMoney() : List<MoneyEntity> {
-        return list
+        val listTemp: MutableList<MoneyEntity> = arrayListOf()
+        for(m in list) {
+            if(m.abbreviationMoney != "PEN") listTemp.add(m)
+        }
+        return listTemp
+    }
+
+    fun getCurrency(abbreviationMoney : String) : MoneyEntity {
+        lateinit var  moneyEntity : MoneyEntity
+        for (m in list) {
+            if (m.abbreviationMoney == abbreviationMoney) moneyEntity = m
+        }
+        return moneyEntity
     }
 
     data class FeaturesJsonEntity(val currencies: List<MoneyEntity>)

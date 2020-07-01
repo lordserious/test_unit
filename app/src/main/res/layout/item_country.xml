@@ -5,8 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+<<<<<<< HEAD
 
     <androidx.cardview.widget.CardView
+=======
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/item_country_linear"
+>>>>>>> 33e381a4ed9ce6376debf922a0231d3904c183e7
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
