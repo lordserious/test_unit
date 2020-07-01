@@ -12,7 +12,6 @@ import com.gerardo.desafiobcp.view.ui.entity.MoneyEntity
 import com.gerardo.desafiobcp.view.ui.utils.ChangeMoney
 import com.gerardo.desafiobcp.view.ui.utils.Money
 import com.gerardo.desafiobcp.view.ui.utils.SimpleTextWatcher
-import com.gerardo.desafiobcp.view.ui.utils.startActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -86,9 +85,6 @@ class MainActivity : BaseActivity() {
 
         changeMoneyValue()
         setClick()
-        /*calculoDeArriba()
-        calculoDeAbajo()*/
-        //setupListener()
     }
 
     override fun onResume() {
@@ -289,7 +285,6 @@ class MainActivity : BaseActivity() {
             putExtra("extra0", typeButton)
         }, REQUEST_MONEY)
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (Activity.RESULT_OK == resultCode && REQUEST_MONEY == requestCode) {
