@@ -2,10 +2,14 @@ package com.gerardo.desafiobcp.view.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.gerardo.desafiobcp.R
 import com.gerardo.desafiobcp.view.ui.base.BaseActivity
+import com.gerardo.desafiobcp.view.ui.entity.MoneyEntity
 import com.gerardo.desafiobcp.view.ui.utils.ChangeMoney
+import com.gerardo.desafiobcp.view.ui.utils.Money
+import com.gerardo.desafiobcp.view.ui.utils.startActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -23,6 +27,13 @@ class MainActivity : BaseActivity() {
         changeMoneyValue()
         calculoDeArriba()
         calculoDeAbajo()
+        val currencies = Money.getAllMoney()
+        Log.d("Money_TAG", "_____________________________${currencies.size}")
+        Log.d("Money_TAG", "_____________________________${currencies.size}")
+
+        btnGo.setOnClickListener {
+            startActivity(FlagsActivity::class.java)
+        }
     }
 
     private fun setUI() {
@@ -258,6 +269,7 @@ class MainActivity : BaseActivity() {
         val nextActivity = Intent(this, FlagsActivity::class.java)
         startActivity(nextActivity)
     }
+
 
     companion object {
 
