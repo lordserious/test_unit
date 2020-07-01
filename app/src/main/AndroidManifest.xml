@@ -3,13 +3,13 @@
     package="com.gerardo.desafiobcp">
 
     <application
+        android:name=".view.ui.application.BcpDesafioApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.ui.activity.FlagsActivity"></activity>
         <activity
             android:name=".view.ui.activity.MainActivity"
             android:theme="@style/SplashTheme">
@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.ui.activity.FlagsActivity"></activity>
     </application>
 
 </manifest>

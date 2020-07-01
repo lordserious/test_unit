@@ -4,19 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.gerardo.desafiobcp.R
+import com.gerardo.desafiobcp.view.ui.base.BaseActivity
 import com.gerardo.desafiobcp.view.ui.utils.ChangeMoney
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     lateinit var operation: ChangeMoney
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun getView(): Int = R.layout.activity_main
+
+    override fun onCreate() {
+        super.onCreate()
 
         Thread.sleep(2000)
-
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         setUI()
         changeMoneyValue()
