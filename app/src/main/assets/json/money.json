@@ -1,6 +1,15 @@
 {
   "currencies": [
     {
+      "MONEY_NAME_COUNTRY": "Peru",
+      "MONEY_NAME": "Soles",
+      "TYPE_CHANGE_SALE": 0.00,
+      "TYPE_CHANGE_BUY": 0.00,
+      "ABBREVIATION_MONEY": "PEN",
+      "URL_FLAG": "https://image.winudf.com/v2/image/Y29tLmZsYWd3YWxscGFwZXIucGVydV9zY3JlZW5fMl8xNTMzNDMzOTg0XzA1MA/screen-2.jpg?fakeurl=1&type=.jpg",
+      "FACTOR_MONEY": ""
+    },
+    {
       "MONEY_NAME_COUNTRY": "European Union",
       "MONEY_NAME": "Euros",
       "TYPE_CHANGE_SALE": 4.10,

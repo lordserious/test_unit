@@ -1,8 +1,13 @@
 package com.gerardo.desafiobcp.view.ui.activity
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.util.Log
+import android.widget.Toast
 import com.gerardo.desafiobcp.R
 import com.gerardo.desafiobcp.view.ui.base.BaseActivity
+import com.gerardo.desafiobcp.view.ui.entity.MoneyEntity
 import com.gerardo.desafiobcp.view.ui.utils.ChangeMoney
 import com.gerardo.desafiobcp.view.ui.utils.Money
 import com.gerardo.desafiobcp.view.ui.utils.startActivity
@@ -11,112 +16,77 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : BaseActivity() {
 
     lateinit var operation: ChangeMoney
+    lateinit var moneyBase : MoneyEntity
+    lateinit var moneyBase2 : MoneyEntity
 
     override fun getView(): Int = R.layout.activity_main
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate() {
         super.onCreate()
-
         Thread.sleep(2000)
+        moneyBase = Money.getCurrency("PEN")
+        moneyBase2 = Money.getCurrency("USD")
 
+        btnChangeIcon.tag = moneyBase
+        btnChangeIconOut.tag = moneyBase2
+
+        btnChangeIcon.text = moneyBase.moneyName
+        btnChangeIconOut.text = moneyBase2.moneyName
+        txtCompraYVenta.text = "Compra: ${moneyBase2.typeChangeBuy} | Venta: ${moneyBase2.typeChangeSale}"
 
         changeMoneyValue()
-        calculoDeArriba()
-        calculoDeAbajo()
-        val currencies = Money.getAllMoney()
+        /*calculoDeArriba()
+        calculoDeAbajo()*/
     }
 
     override fun onResume() {
         super.onResume()
-        setUI()
+        /*setUI()*/
         //validationFlags()
     }
     private fun setUI() {
-        txtCompraYVenta.text = "Compra: $TIPO_CAMBIO_COMPRA_DOLAR | Venta: $TIPO_CAMBIO_VENTA_DOLAR"
+        btnChangeIcon.text = (btnChangeIcon.tag as MoneyEntity).moneyName
+        btnChangeIconOut.text = (btnChangeIconOut.tag as MoneyEntity).moneyName
     }
 
     private fun changeMoneyValue() {
-
         moneyChange.setOnClickListener {
-            if (btnChangeIcon.text == DOLARES && btnChangeIconOut.text == SOLES) {
-                Thread.sleep(100)
-                btnChangeIcon.text = "Soles"
-                btnChangeIconOut.text = "Dolares"
-                circuloCambioDeValores()
-            } else {
-                Thread.sleep(100)
-                btnChangeIcon.text = "Dolares"
-                btnChangeIconOut.text = "Soles"
-                circuloCambioDeValores()
-            }
+            val temporalSave = btnChangeIcon.tag as MoneyEntity
+            val temporalSave2 = btnChangeIconOut.tag as MoneyEntity
+            btnChangeIcon.tag = temporalSave2
+            btnChangeIconOut.tag = temporalSave
+            btnChangeIcon.text = temporalSave2.moneyName
+            btnChangeIconOut.text = temporalSave.moneyName
+            Log.d("click_b", "________________${(btnChangeIcon.tag as MoneyEntity).moneyName}")
+            Log.d("click_b", "________________${(btnChangeIconOut.tag as MoneyEntity).moneyName}")
+            changedValues()
         }
 
     }
-
-    fun circuloCambioDeValores() {
+    private fun changedValues() {
         when {
-            btnChangeIcon.text == DOLARES && btnChangeIconOut.text == SOLES -> {
-                val nuevoValor =
-                    (txtMoneyIn.text.toString().trim().toDouble()) * TIPO_CAMBIO_COMPRA_DOLAR
-                txtMoneyOut.setText(nuevoValor.toString())
+            btnChangeIcon.tag == moneyBase2 && btnChangeIconOut.tag == moneyBase -> {
+                val newValue = if(txtMoneyIn.text.toString().trim().isNotEmpty()) (txtMoneyIn.text.toString().trim().toDouble()) * moneyBase2.typeChangeBuy else ""// TIPO_CAMBIO_COMPRA_DOLAR
+                txtMoneyOut.setText(newValue.toString())
             }
-            btnChangeIcon.text == SOLES && btnChangeIconOut.text == DOLARES -> {
-                val nuevoValor =
-                    (txtMoneyIn.text.toString().trim().toDouble()) / TIPO_CAMBIO_VENTA_DOLAR
-                txtMoneyOut.setText(nuevoValor.toString())
+            btnChangeIcon.tag == moneyBase && btnChangeIconOut.tag == moneyBase2 -> {
+                val newValue = if(txtMoneyIn.text.toString().trim().isNotEmpty()) (txtMoneyIn.text.toString().trim().toDouble()) / moneyBase2.typeChangeSale else ""// TIPO_CAMBIO_VENTA_DOLAR
+                txtMoneyOut.setText(newValue.toString())
             }
-            btnChangeIcon.text == EUROS && btnChangeIconOut.text == SOLES -> {
-                val nuevoValor =
-                    (txtMoneyIn.text.toString().trim().toDouble()) * TIPO_CAMBIO_COMPRA_EURO
-                txtMoneyOut.setText(nuevoValor.toString())
+            else -> {
+                Toast.makeText(this, "Error", Toast.LENGTH_LONG)
             }
-            btnChangeIcon.text == SOLES && btnChangeIconOut.text == EUROS -> {
-                val nuevoValor =
-                    (txtMoneyIn.text.toString().trim().toDouble()) / TIPO_CAMBIO_VENTA_EURO
-                txtMoneyOut.setText(nuevoValor.toString())
-            }
-            btnChangeIcon.text == LIBRAS && btnChangeIconOut.text == SOLES -> {
-                val nuevoValor =
-                    (txtMoneyIn.text.toString().trim().toDouble()) * TIPO_CAMBIO_COMPRA_LIBRA
-                txtMoneyOut.setText(nuevoValor.toString())
-            }
-            btnChangeIcon.text == SOLES && btnChangeIconOut.text == LIBRAS -> {
-                val nuevoValor =
-                    (txtMoneyIn.text.toString().trim().toDouble()) / TIPO_CAMBIO_VENTA_LIBRA
-                txtMoneyOut.setText(nuevoValor.toString())
-            }
-            btnChangeIcon.text == YENES && btnChangeIconOut.text == SOLES -> {
-                val nuevoValor =
-                    (txtMoneyIn.text.toString().trim().toDouble()) * TIPO_CAMBIO_COMPRA_YEN
-                txtMoneyOut.setText(nuevoValor.toString())
-            }
-            btnChangeIcon.text == SOLES && btnChangeIconOut.text == YENES -> {
-                val nuevoValor =
-                    (txtMoneyIn.text.toString().trim().toDouble()) / TIPO_CAMBIO_VENTA_YEN
-                txtMoneyOut.setText(nuevoValor.toString())
-            }
-            btnChangeIcon.text == DOLAR_CANADIENSE && btnChangeIconOut.text == SOLES -> {
-                val nuevoValor =
-                    (txtMoneyIn.text.toString().trim()
-                        .toDouble()) * TIPO_CAMBIO_COMPRA_DOLAR_CANADIENSE
-                txtMoneyOut.setText(nuevoValor.toString())
-            }
-            btnChangeIcon.text == SOLES && btnChangeIconOut.text == DOLAR_CANADIENSE -> {
-                val nuevoValor =
-                    (txtMoneyIn.text.toString().trim()
-                        .toDouble()) / TIPO_CAMBIO_VENTA_DOLAR_CANADIENSE
-                txtMoneyOut.setText(nuevoValor.toString())
-            }
-            btnChangeIcon.text == FRANCO_SUIZO && btnChangeIconOut.text == SOLES -> {
-                val nuevoValor =
-                    (txtMoneyIn.text.toString().trim().toDouble()) * TIPO_CAMBIO_COMPRA_FRANCO_SUIZO
-                txtMoneyOut.setText(nuevoValor.toString())
-            }
-            btnChangeIcon.text == SOLES && btnChangeIconOut.text == FRANCO_SUIZO -> {
-                val nuevoValor =
-                    (txtMoneyIn.text.toString().trim().toDouble()) / TIPO_CAMBIO_VENTA_FRANCO_SUIZO
-                txtMoneyOut.setText(nuevoValor.toString())
-            }
+        }
+    }
+
+    fun setClick() {
+        btnChangeIcon.setOnClickListener {
+            if ((it.tag as MoneyEntity) != moneyBase) openCurrencyFlag(0)
+        }
+
+        btnChangeIcon.setOnClickListener {
+            if ((it.tag as MoneyEntity) != moneyBase) openCurrencyFlag(1)
         }
     }
 
@@ -260,20 +230,20 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    /*VALIDACION DE BOTON PARA QUE ME ABRA LA TERCERA PANTALLA*/
+    fun openCurrencyFlag(typeButton : Int) {
+        startActivityForResult(Intent(this, FlagsActivity::class.java).apply {
+            putExtra("extra0", typeButton)
+        }, REQUEST_MONEY)
+    }
 
-    fun validationFlags() {
-        when {
-            btnChangeIcon.text != SOLES -> {
-                startActivity(FlagsActivity::class.java)
-            }
-            btnChangeIconOut.text != SOLES -> {
-                startActivity(FlagsActivity::class.java)
-            }
-            else -> {
-                Log.wtf("RetoBcp", "----")
-            }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (Activity.RESULT_OK == resultCode && REQUEST_MONEY == requestCode) {
+            val typeButton = data?.getSerializableExtra("extra0") as Int
+            val moneyEntity = data?.getSerializableExtra("extra1") as MoneyEntity
+            moneyBase2 = moneyEntity
         }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     companion object {
@@ -305,5 +275,6 @@ class MainActivity : BaseActivity() {
         private const val DOLAR_CANADIENSE = "Dolar Canadiense"
         private const val FRANCO_SUIZO = "Franco Suizo"
 
+        private const val REQUEST_MONEY = 2863
     }
 }

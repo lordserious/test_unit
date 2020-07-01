@@ -56,7 +56,6 @@
                     android:layout_gravity="center"
                     android:background="@color/blueBcp"
                     android:gravity="center"
-                    android:text="Dolares"
                     android:textColor="@color/colorWhite" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -101,7 +100,6 @@
                     android:layout_gravity="center"
                     android:background="@color/blueBcp"
                     android:gravity="center"
-                    android:text="Soles"
                     android:textColor="@color/colorWhite" />
 
 

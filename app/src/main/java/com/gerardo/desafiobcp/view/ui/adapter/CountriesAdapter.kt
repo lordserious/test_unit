@@ -19,7 +19,7 @@ import com.gerardo.desafiobcp.view.ui.entity.MoneyEntity
 import com.gerardo.desafiobcp.view.ui.utils.inflate
 import kotlinx.android.synthetic.main.item_country.view.*
 
-class CountriesAdapter(private val listener: (Int, MoneyEntity) -> Unit) : RecyclerView.Adapter<CountriesAdapter.ArticleHolder>() {
+class CountriesAdapter(private val listener: (MoneyEntity) -> Unit) : RecyclerView.Adapter<CountriesAdapter.ArticleHolder>() {
     var data: List<MoneyEntity> = arrayListOf()
 
     override fun onBindViewHolder(holder: ArticleHolder, position: Int) = holder.bind(data[position], listener)
@@ -31,7 +31,7 @@ class CountriesAdapter(private val listener: (Int, MoneyEntity) -> Unit) : Recyc
     override fun getItemViewType(position: Int) = position
 
     class ArticleHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: MoneyEntity, listener: (Int, MoneyEntity) -> Unit) = with(itemView) {
+        fun bind(item: MoneyEntity, listener: (MoneyEntity) -> Unit) = with(itemView) {
             Glide.with(this@with)
                 .load(item.urlFlag)
                 .apply(
