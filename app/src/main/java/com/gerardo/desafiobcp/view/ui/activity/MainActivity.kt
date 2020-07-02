@@ -3,6 +3,7 @@ package com.gerardo.desafiobcp.view.ui.activity
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.os.Environment
 import android.text.Editable
 import android.util.Log
 import android.widget.Toast
@@ -13,6 +14,9 @@ import com.gerardo.desafiobcp.view.ui.utils.ChangeMoney
 import com.gerardo.desafiobcp.view.ui.utils.Money
 import com.gerardo.desafiobcp.view.ui.utils.SimpleTextWatcher
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
+import java.io.PrintWriter
+import java.util.*
 
 class MainActivity : BaseActivity() {
 
@@ -55,7 +59,7 @@ class MainActivity : BaseActivity() {
                             txtMoneyOut.setText(newValue.toString())
                         }
                         else -> {
-                            Toast.makeText(this@MainActivity, "Error", Toast.LENGTH_LONG)
+                            Toast.makeText(this@MainActivity, "Error", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -64,6 +68,7 @@ class MainActivity : BaseActivity() {
         })
 
         txtMoneyOut.addTextChangedListener(object : SimpleTextWatcher() {
+            @SuppressLint("ShowToast")
             override fun afterTextChanged(s: Editable?) {
                 if(!txtMoneyIn.isFocused && txtMoneyOut.isFocused) {
                     when {
@@ -76,7 +81,7 @@ class MainActivity : BaseActivity() {
                             txtMoneyIn.setText(newValue.toString())
                         }
                         else -> {
-                            Toast.makeText(this@MainActivity, "Error", Toast.LENGTH_LONG)
+                            Toast.makeText(this@MainActivity, "Error", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -85,6 +90,14 @@ class MainActivity : BaseActivity() {
 
         changeMoneyValue()
         setClick()
+        btnOperationChange2.setOnClickListener {
+            if (txtMoneyIn.text.toString().trim().isNotEmpty() && txtMoneyIn.text.toString().trim().isNotEmpty()) {
+                saveDataInText()
+            }
+            else {
+                Toast.makeText(this, "Campos requeridos", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     override fun onResume() {
@@ -125,7 +138,7 @@ class MainActivity : BaseActivity() {
                 txtMoneyOut.setText(newValue.toString())
             }
             else -> {
-                Toast.makeText(this, "Error", Toast.LENGTH_LONG)
+                Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -284,6 +297,20 @@ class MainActivity : BaseActivity() {
         startActivityForResult(Intent(this, FlagsActivity::class.java).apply {
             putExtra("extra0", typeButton)
         }, REQUEST_MONEY)
+    }
+
+    private fun saveDataInText() {
+        val path = this.getExternalFilesDir(null)
+        Log.d("tag 1", "_________")
+        val letDirectory = File(path, "LET")
+        Log.d("tag 2", "_________${letDirectory.exists()}")
+        letDirectory.mkdirs()
+        Log.d("tag 3", "_________")
+        val file = File(letDirectory, "bcp.txt")
+        Log.d("tag 4", "_________${file.exists()}")
+        val date = Date()
+
+        file.appendText("\nbcp${date.time} - ${(btnChangeIcon.tag as MoneyEntity).abbreviationMoney} - ${txtMoneyIn.text.toString().trim()} - txtMoneyOut:${(btnChangeIconOut.tag as MoneyEntity).abbreviationMoney} - ${txtMoneyOut.text.toString().trim()}")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
