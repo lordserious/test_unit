@@ -150,13 +150,9 @@ class MainActivity : BaseActivity() {
 
     private fun saveDataInText() {
         val path = this.getExternalFilesDir(null)
-        Log.d("tag 1", "_________")
         val letDirectory = File(path, "LET")
-        Log.d("tag 2", "_________${letDirectory.exists()}")
         letDirectory.mkdirs()
-        Log.d("tag 3", "_________")
         val file = File(letDirectory, "bcp.txt")
-        Log.d("tag 4", "_________${file.exists()}")
         val date = Date()
 
         file.appendText("\nbcp${date.time} - ${(btnChangeIcon.tag as MoneyEntity).abbreviationMoney} - ${txtMoneyIn.text.toString().trim()} - txtMoneyOut:${(btnChangeIconOut.tag as MoneyEntity).abbreviationMoney} - ${txtMoneyOut.text.toString().trim()}")
@@ -178,6 +174,20 @@ class MainActivity : BaseActivity() {
                 btnChangeIconOut.tag = moneyBase2
                 btnChangeIcon.text = moneyBase.moneyName
                 btnChangeIconOut.text = moneyBase2.moneyName
+            }
+
+            when {
+                btnChangeIcon.tag == moneyBase2 && btnChangeIconOut.tag == moneyBase -> {
+                    val newValue = if(txtMoneyIn.text.toString().trim().isNotEmpty()) (txtMoneyIn.text.toString().trim().toDouble()) * moneyBase2.typeChangeBuy else ""// TIPO_CAMBIO_COMPRA_DOLAR
+                    txtMoneyOut.setText(newValue.toString())
+                }
+                btnChangeIcon.tag == moneyBase && btnChangeIconOut.tag == moneyBase2 -> {
+                    val newValue = if(txtMoneyIn.text.toString().trim().isNotEmpty()) (txtMoneyIn.text.toString().trim().toDouble()) / moneyBase2.typeChangeSale else ""// TIPO_CAMBIO_VENTA_DOLAR
+                    txtMoneyOut.setText(newValue.toString())
+                }
+                else -> {
+                    Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
+                }
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
